@@ -4,8 +4,8 @@ import time
 import reply
 
 '''
-TODO - Handle unknown #403 HTTP exception
-	 - .
+TODO - Optimisation
+	- .
 '''
 
 print("Logging in...")
