@@ -89,10 +89,17 @@ def bot_listener():
 def main():
 	try:
 		bot_listener()
+		
 	except praw.exceptions.APIException as error:
-		print("Possible 'you are doing that too much' exception found"
-		+ ". Sleeping for 600 seconds")
-		time.sleep(600)
+		if 'RATELIMIT' in str(error):
+			print("'You are doing that too much' restriction found.")
+			'''
+			+ ". Sleeping for 600 seconds")
+			time.sleep(600)
+			'''
+			time.sleep(10)
+			main()
+		
 	except prawcore.exceptions.Forbidden as error:
 		if str(error) == 'received 403 HTTP response':
 			print("Potentially banned from this subreddit, skipping..")
