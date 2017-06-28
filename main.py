@@ -40,7 +40,7 @@ def is_incorrect(word):
 def bot_listener():
 	print("Grabbing subreddit...")
     #get_subreddit("test+test+test") for multiple subreddits
-	subreddit = r.subreddit("test")
+	subreddit = r.subreddit("all")
 	print("Grabbing comments...")
 	comments = subreddit.stream.comments()
 	'''
