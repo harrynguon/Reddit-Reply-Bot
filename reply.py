@@ -1,4 +1,3 @@
-
 #forms the automated reply for the grammar comments
 def make_reply_grammar(comment):
     print("Match found! Comment ID: " + comment.id)
