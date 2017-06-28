@@ -3,3 +3,5 @@ A reddit bot that replies to a certain set of comments that fits the criteria. W
 
 ![](http://i.imgur.com/NIG3mHj.png)
 ![](http://i.imgur.com/lYFy2bj.png)
+
+The script will create two text files upon use, that will be used in runtime to store the people's comments that it has already replied to.
