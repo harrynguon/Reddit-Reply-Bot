@@ -93,7 +93,7 @@ def main():
 	except praw.exceptions.APIException as error:
 		if 'RATELIMIT' in str(error):
 			print("\t'You are doing that too much' restriction encountered."
-			" Skipping the reply.")
+			" Skipping the comment reply.")
 			'''
 			+ ". Sleeping for 600 seconds")
 			time.sleep(600)
