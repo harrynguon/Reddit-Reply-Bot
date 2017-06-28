@@ -40,7 +40,7 @@ def is_incorrect(word):
 def bot_listener():
 	print("Grabbing subreddit...")
     #get_subreddit("test+test+test") for multiple subreddits
-	subreddit = r.subreddit("all")
+	subreddit = r.subreddit("test")
 	print("Grabbing comments...")
 	comments = subreddit.stream.comments()
 	'''
@@ -73,15 +73,17 @@ def bot_listener():
 				if is_incorrect(comments[count-1]):
 					if word in misspelled_combination:
 						reply.make_reply_grammar(comment)
+						cache.append(comment.id)
 						#can contain multiple words
 						continue
-					count+=1
-				count = 0
+				count+=1
+			count = 0
 
 		#Makes a reply to the comment as it contains a sad face emoticon
 		if (comment.id not in sad_face_cache[0] and sad_face_match
 		and '>' not in comment_text and comment.author != me):
 			reply.make_reply_sadface(comment)
+			sad_face_cache.append(comment.id)
 			continue
 
 def main():
@@ -91,11 +93,8 @@ def main():
 		print("Possible 'you are doing that too much' exception found"
 		+ ". Sleeping for 600 seconds")
 		time.sleep(600)
-	except:
-		print("Unknown exception occurred..")
-		time.sleep(10)
 
-	#unreachable
+	#exception occurred
 	print("Done")
 
 if __name__ == '__main__':
