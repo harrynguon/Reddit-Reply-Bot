@@ -92,7 +92,8 @@ def main():
 		
 	except praw.exceptions.APIException as error:
 		if 'RATELIMIT' in str(error):
-			print("'You are doing that too much' restriction found.")
+			print("\t'You are doing that too much' restriction encountered."
+			" Skipping the reply.")
 			'''
 			+ ". Sleeping for 600 seconds")
 			time.sleep(600)
@@ -102,7 +103,7 @@ def main():
 		
 	except prawcore.exceptions.Forbidden as error:
 		if str(error) == 'received 403 HTTP response':
-			print("Potentially banned from this subreddit, skipping..")
+			print("\tPotentially banned from this subreddit, skipping..")
 			time.sleep(10)
 			main()
 	
