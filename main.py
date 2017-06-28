@@ -99,13 +99,13 @@ def main():
 			time.sleep(600)
 			'''
 			time.sleep(10)
-			main()
+			#main()
 		
 	except prawcore.exceptions.Forbidden as error:
 		if str(error) == 'received 403 HTTP response':
 			print("\tPotentially banned from this subreddit, skipping..")
 			time.sleep(10)
-			main()
+			#main()
 	
 	#unknown exception occurred
 	print("Done")
