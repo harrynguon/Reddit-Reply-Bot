@@ -14,8 +14,8 @@ r = praw.Reddit(user_agent='**********',
                 client_secret='**********',
                 username='**********',
                 password='**********')
-me = r.user.me()
 
+me = r.user.me()
 
 misspelled_words = ['should of', 'could of', 'would of']
 misspelled_combination = ['of', 'of,', 'of.', 'of!', 'of/', 'of?']
