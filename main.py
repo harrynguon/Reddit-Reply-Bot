@@ -93,8 +93,13 @@ def main():
 		print("Possible 'you are doing that too much' exception found"
 		+ ". Sleeping for 600 seconds")
 		time.sleep(600)
-
-	#exception occurred
+	except prawcore.exceptions.Forbidden as error:
+		if str(error) == 'received 403 HTTP response':
+			print("Potentially banned from this subreddit, skipping..")
+			time.sleep(10)
+			main()
+	
+	#unknown exception occurred
 	print("Done")
 
 if __name__ == '__main__':
