@@ -121,7 +121,7 @@ def main():
 	try:
 		bot_listener()
 	except Exception as e:
-		pass
+		print(e)
 
 	#unknown exception occurred
 	print("Done")
