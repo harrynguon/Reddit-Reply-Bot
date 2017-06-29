@@ -36,7 +36,7 @@ def is_incorrect(word):
         return True
 
     return False;
-	
+
 def bot_listener():
 	print("Grabbing subreddit...")
     #get_subreddit("test+test+test") for multiple subreddits
@@ -60,7 +60,7 @@ def bot_listener():
 		criterium
 		'''
 		sad_face_match = any(string in comments for string in sad_faces)
-		
+
 		if (comment.id not in cache[0] and is_match and '>' not in comment_text
 		and comment.author != me):
 			count = 0
@@ -72,7 +72,22 @@ def bot_listener():
 			for word in comments:
 				if is_incorrect(comments[count-1]):
 					if word in misspelled_combination:
-						reply.make_reply_grammar(comment)
+						try:
+							reply.make_reply_grammar(comment)
+						except praw.exceptions.APIException as error:
+							if 'RATELIMIT' in str(error):
+								print("\t'You are doing that too much '"
+								"restriction encountered. Skipping the comment reply.")
+								time.sleep(10)
+								break
+
+						except prawcore.exceptions.Forbidden as error:
+							if str(error) == 'received 403 HTTP response':
+								print("\tPotentially banned from this subreddit, "
+								"skipping..")
+								time.sleep(10)
+								break
+
 						cache.append(comment.id)
 						#can contain multiple words
 						continue
@@ -82,31 +97,31 @@ def bot_listener():
 		#Makes a reply to the comment as it contains a sad face emoticon
 		if (comment.id not in sad_face_cache[0] and sad_face_match
 		and '>' not in comment_text and comment.author != me):
-			reply.make_reply_sadface(comment)
+			try:
+				reply.make_reply_sadface(comment)
+			except praw.exceptions.APIException as error:
+				if 'RATELIMIT' in str(error):
+					print("\t'You are doing that too much' "
+					"restriction encountered. Skipping the comment reply.")
+					time.sleep(10)
+					continue
+
+			except prawcore.exceptions.Forbidden as error:
+				if str(error) == 'received 403 HTTP response':
+					print("\tPotentially banned from this subreddit, "
+					"skipping..")
+					time.sleep(10)
+					continue
+
 			sad_face_cache.append(comment.id)
 			continue
 
 def main():
 	try:
 		bot_listener()
-		
-	except praw.exceptions.APIException as error:
-		if 'RATELIMIT' in str(error):
-			print("\t'You are doing that too much' restriction encountered."
-			" Skipping the comment reply.")
-			'''
-			+ ". Sleeping for 600 seconds")
-			time.sleep(600)
-			'''
-			time.sleep(10)
-			#main()
-		
-	except prawcore.exceptions.Forbidden as error:
-		if str(error) == 'received 403 HTTP response':
-			print("\tPotentially banned from this subreddit, skipping..")
-			time.sleep(10)
-			#main()
-	
+	except Exception as e:
+		pass
+
 	#unknown exception occurred
 	print("Done")
 
