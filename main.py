@@ -9,6 +9,7 @@ TODO - Optimisation
 '''
 
 print("Logging in...")
+
 r = praw.Reddit(user_agent='**********',
                 client_id='**********',
                 client_secret='**********',
