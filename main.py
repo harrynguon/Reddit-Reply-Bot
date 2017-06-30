@@ -80,14 +80,14 @@ def bot_listener():
 								print("\t'You are doing that too much '"
 								"restriction encountered. Skipping the comment reply.")
 								time.sleep(10)
-								break
+								pass
 
 						except prawcore.exceptions.Forbidden as error:
 							if str(error) == 'received 403 HTTP response':
 								print("\tPotentially banned from this subreddit, "
 								"skipping..")
 								time.sleep(10)
-								break
+								pass
 
 						cache.append(comment.id)
 						#can contain multiple words
@@ -105,14 +105,14 @@ def bot_listener():
 					print("\t'You are doing that too much' "
 					"restriction encountered. Skipping the comment reply.")
 					time.sleep(10)
-					continue
+					pass
 
 			except prawcore.exceptions.Forbidden as error:
 				if str(error) == 'received 403 HTTP response':
 					print("\tPotentially banned from this subreddit, "
 					"skipping..")
 					time.sleep(10)
-					continue
+					pass
 
 			sad_face_cache.append(comment.id)
 			continue
