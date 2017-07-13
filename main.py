@@ -36,7 +36,7 @@ def is_incorrect(word):
     if word == 'should' or word == 'would' or word == 'could':
         return True
 
-    return False;
+    return False
 
 def bot_listener():
 	print("Grabbing subreddit...")
