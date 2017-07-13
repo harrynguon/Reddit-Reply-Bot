@@ -3,13 +3,15 @@ import prawcore
 import time
 import reply
 
-'''
-TODO - Optimisation
-	- .
+''' This bot will reply to certain comments that contains incorrect usage of
+    should/could/would've or if the comment contains a sad face emoticon, e.g. ':('.
+    The script will create two text files upon use, which will be handled at runtime
+    to read and store the people's comment ID's that it has replied to.
 '''
 
 print("Logging in...")
 
+#fill user details here (see the PRAW documentation).
 r = praw.Reddit(user_agent='**********',
                 client_id='**********',
                 client_secret='**********',
@@ -41,7 +43,7 @@ def is_incorrect(word):
 def bot_listener():
 	print("Grabbing subreddit...")
     #get_subreddit("test+test+test") for multiple subreddits
-	subreddit = r.subreddit("all")
+	subreddit = r.subreddit('all')
 	print("Grabbing comments...")
 	comments = subreddit.stream.comments()
 	'''
@@ -65,10 +67,9 @@ def bot_listener():
 		if (comment.id not in cache[0] and is_match and '>' not in comment_text
 		and comment.author != me):
 			count = 0
-			'''
-			finds the incorrect grammar combination of the words, makes a reply,
-			and adds the comment ID to the list so that we don't reply to the
-			same person more than once
+			''' finds the incorrect grammar combination of the words, makes a reply,
+			    and adds the comment ID to the list so that we don't reply to the
+			    same person more than once
 			'''
 			for word in comments:
 				if is_incorrect(comments[count-1]):
