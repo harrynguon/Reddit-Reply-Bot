@@ -11,10 +11,10 @@ import webbrowser
 print("Logging in...")
 
 #fill user details here (see PRAW documentation).
-r = praw.Reddit(user_agent='food good posts by /u/protanoa_is_gay',
-                client_id='JQlM7DGCPrdycQ',
-                client_secret='pfqyzl32dc1PO0Buna57Uj77XxY',
-                username='protanoa_is_gay',
+r = praw.Reddit(user_agent='**********',
+                client_id='**********',
+                client_secret='**********',
+                username='**********',
                 password='**********')
 
 me = r.user.me()
